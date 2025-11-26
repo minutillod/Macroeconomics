@@ -12,7 +12,7 @@ SERIES = {
     "M3.GPM": "Nominal_GDP",
     "M1.GPM_PCA": "Real_GDP_per_capita",
     "M3.GPM_PCA": "Nominal_GDP_per_capita",
-    "M2.GPM_PCA": "Real_GDP_per_capita_growth",
+    # "M2.GPM_PCA": "Real_GDP_per_capita_growth",
     # "M4.GPM_PCA": "Nominal_GDP_per_capita_growth"
 }
 
@@ -86,6 +86,20 @@ def main():
     for d in annual_dfs[1:]:
         df_annual = pd.merge(df_annual, d, on="Year", how="outer")
 
+    # SCALE: Divide Nominal and Real GDP by 1000 to convert to billions
+    # SCALE: Divide Nominal and Real GDP per capital by 100 to convert to thousands
+    for col in ["Nominal_GDP", "Real_GDP", "Nominal_GDP_per_capita", "Real_GDP_per_capita"]:
+        if col in df_annual.columns:
+            df_annual[col] = (df_annual[col] / 1000).round(2)
+
+    # Calculate Real GDP per capita growth
+    if "Real_GDP_per_capita" in df_annual.columns:
+        df_annual = calculate_growth_rate(
+            df_annual,
+            value_col="Real_GDP_per_capita",
+            new_col="Real_GDP_per_capita_growth"
+        )
+
     # Calculate Nominal GDP per capita growth
     if "Nominal_GDP_per_capita" in df_annual.columns:
         df_annual = calculate_growth_rate(
@@ -95,9 +109,9 @@ def main():
         )
 
     df_annual = df_annual.sort_values("Year")
-    df_annual.to_csv("GDP_annual.csv", index=False)
+    df_annual.to_csv("ANA_AGG_annual.csv", index=False)
 
-    print("✅ Annual data saved to 'GDP_annual.csv'")
+    print("✅ Annual data saved to 'ANA_AGG_annual.csv'")
     print(df_annual.tail())
 
 if __name__ == "__main__":
