@@ -20,6 +20,7 @@ jobs:
 
       - name: Install Dependencies
         run: pip install requests
+        run: pip install cairosvg
 
       - name: Download files
         run: python scr/getRBAGraphs.py
