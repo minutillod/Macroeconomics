@@ -22,7 +22,7 @@ jobs:
         run: pip install requests
 
       - name: Download files
-        run: python src/getRBAGraphs.py
+        run: python scr/getRBAGraphs.py
 
       - name: Upload downloads
         uses: actions/upload-artifact@v5.0.0
