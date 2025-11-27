@@ -1,31 +1,88 @@
+# name: Download RBA Graphs
+
+# on:
+#   # Allows you to run this workflow manually from the Actions tab
+#   workflow_dispatch:
+# defaults:
+#   run:
+#     shell: bash
+# jobs:
+#   download:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v6.0.0
+
+#       - name: Install Python
+#         uses: actions/setup-python@v5
+#         with:
+#           python-version: '3.12'
+
+#       - name: Install Dependencies
+#         run: pip install requests cairosvg
+
+#       - name: Download files
+#         run: python scr/getRBAGraphs.py
+
+#       - name: Upload downloads
+#         uses: actions/upload-artifact@v5.0.0
+#         with:
+#           name: Images
+#           path: downloaded_files/
+
 name: Download RBA Graphs
 
 on:
-  # Allows you to run this workflow manually from the Actions tab
+  # Manual trigger (you can also add schedule:)
   workflow_dispatch:
+
 defaults:
   run:
     shell: bash
+
 jobs:
   download:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6.0.0
 
-      - name: Install Python
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
+          fetch-depth: 0
+
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: "3.12"
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: pip install requests cairosvg
 
-      - name: Download files
+      - name: Run download script
         run: python scr/getRBAGraphs.py
 
-      - name: Upload downloads
-        uses: actions/upload-artifact@v5.0.0
+      # ✅ Commit and push changes back to repository
+      - name: Commit and push updated files
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Move or ensure your files are in a tracked directory
+          git add downloaded_files/
+
+          # Only commit if there are changes
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Update RBA graphs (automated commit)"
+            git push origin HEAD:${{ github.ref }}
+          fi
+
+      # Optional: still upload as artifact
+      - name: Upload images as artifact
+        uses: actions/upload-artifact@v4
         with:
           name: Images
           path: downloaded_files/
