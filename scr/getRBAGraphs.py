@@ -38,7 +38,7 @@ for url in urls_to_download:
         print(f"🎨 Converted to PNG: {os.path.basename(png_path)}")
 
         # (Optional) remove the SVG if you only want the PNG
-        # os.remove(svg_path)
+        os.remove(svg_path)
 
     except requests.exceptions.RequestException as e:
         print(f"❌ Error downloading {url}: {e}")
