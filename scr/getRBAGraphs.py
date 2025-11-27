@@ -1,9 +1,14 @@
 import requests
 import os
 
+base_url = "https://www.rba.gov.au/chart-pack/images/"
+
 # List of URLs to download
 urls_to_download = [
-    "https://www.rba.gov.au/chart-pack/images/au-growth/gdp-growth.svg",
+    "{base_url}world-economy/gdp-growth-advanced-economies.svg",
+    "{base_url}world-economy/gdp-growth-china-and-india.svg",
+    "{base_url}world-economy/inflation-advanced-economies.svg",
+    "{base_url}chart-pack/images/au-growth/gdp-growth.svg",
 ]
 
 # Directory to save the downloaded files
