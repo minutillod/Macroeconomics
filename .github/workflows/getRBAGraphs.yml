@@ -36,6 +36,9 @@ on:
   # Manual trigger (you can also add schedule:)
   workflow_dispatch:
 
+permissions:
+  contents: write  # ✅ allow pushes to the repo
+
 defaults:
   run:
     shell: bash
