@@ -1,4 +1,4 @@
-name: run main.py
+name: Download ABS Data (ANA_AGG)
 
 on:
   schedule:
