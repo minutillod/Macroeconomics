@@ -24,7 +24,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install Dependencies
-        run: pip install requests cairosvg
+        run: pip install pandas requests cairosvg
 
       - name: Download files
         run: python scr/getABS_ANA_AGG.py
