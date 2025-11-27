@@ -5,10 +5,10 @@ base_url = "https://www.rba.gov.au/chart-pack/images/"
 
 # List of URLs to download
 urls_to_download = [
-    "{base_url}world-economy/gdp-growth-advanced-economies.svg",
-    "{base_url}world-economy/gdp-growth-china-and-india.svg",
-    "{base_url}world-economy/inflation-advanced-economies.svg",
-    "{base_url}chart-pack/images/au-growth/gdp-growth.svg",
+    f"{base_url}world-economy/gdp-growth-advanced-economies.svg",
+    f"{base_url}world-economy/gdp-growth-china-and-india.svg",
+    f"{base_url}world-economy/inflation-advanced-economies.svg",
+    f"{base_url}chart-pack/images/au-growth/gdp-growth.svg",
 ]
 
 # Directory to save the downloaded files
