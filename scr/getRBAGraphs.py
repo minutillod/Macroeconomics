@@ -6,10 +6,40 @@ base_url = "https://www.rba.gov.au/chart-pack/images/"
 
 # List of URLs to download
 urls_to_download = [
-    f"{base_url}world-economy/gdp-growth-advanced-economies.svg",
+    # World Economy
     f"{base_url}world-economy/gdp-growth-china-and-india.svg",
+    f"{base_url}world-economy/gdp-growth-advanced-economies.svg",
     f"{base_url}world-economy/inflation-advanced-economies.svg",
+    f"{base_url}world-economy/unemployment-rate-advanced-economies.svg",
+    # Australian Growth
     f"{base_url}au-growth/gdp-growth.svg",
+    # Australian Inflation
+    f"{base_url}aus-inflation/consumer-price-inflation.svg",
+    # Household Sector
+    f"{base_url}household-sector/household-income-and-consumption.svg",
+    # Factors of Production and Labour Market
+    f"{base_url}factors-prod-labour-mkt/employment-and-participation-rates.svg",
+    f"{base_url}factors-prod-labour-mkt/employment-and-hours-worked.svg",
+    f"{base_url}factors-prod-labour-mkt/labour-underutilisation-rates.svg",
+    f"{base_url}factors-prod-labour-mkt/job-vacancies-and-advertisements.svg",
+    # Government
+    f"{base_url}government/australian-government-budget-balance.svg",
+    # Balance of Payments and External Position
+    f"{base_url}balance-payments/export-volumes.svg",
+    f"{base_url}balance-payments/import-volumes.svg",
+    f"{base_url}balance-payments/current-account-balance.svg",
+    f"{base_url}balance-payments/external-position.svg",
+    # Central Bank Balance Sheets and Bond Purchases
+    f"{base_url}central-bank-balance-sheets-bond-purchases/rba-assets.svg",
+    f"{base_url}central-bank-balance-sheets-bond-purchases/rba-liabilities.svg",
+    # Interest Rates
+    f"{base_url}interest-rates/australian-cash-rate-and-90-day-bill-yield.svg",
+    f"{base_url}interest-rates/fixed-housing-interest-rates.svg",
+    f"{base_url}interest-rates/australian-business-lending-rates.svg",
+    # Exchange Rates
+    f"{base_url}exchange-rates/australian-dollar-trade-weighted-index.svg",
+    f"{base_url}exchange-rates/australian-dollar.svg",
+    f"{base_url}exchange-rates/us-dollar.svg",
 ]
 
 # Directory to save the downloaded files
