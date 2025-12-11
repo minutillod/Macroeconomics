@@ -54,9 +54,9 @@ jobs:
             git push origin HEAD:${{ github.ref }}
           fi
 
-      # ✅ Upload CSV as artifact for easy download from workflow page
-      - name: Upload ABS Data CSV
-        uses: actions/upload-artifact@v4
-        with:
-          name: ABS-ANA-AGG-Data
-          path: *.csv_token: ${{ secrets.GITHUB_TOKEN }}
+      # # ✅ Upload CSV as artifact for easy download from workflow page
+      # - name: Upload ABS Data CSV
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: ABS-ANA-AGG-Data
+      #     path: *.csv_token: ${{ secrets.GITHUB_TOKEN }}
