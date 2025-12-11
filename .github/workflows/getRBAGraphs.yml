@@ -1,59 +1,90 @@
 name: Download RBA Graphs
+
 on:
-  # Uncomment to enable weekly schedule at 00:00 UTC on Saturday
-  # schedule:
-  #   - cron: '0 0 * * 6'
-
-  # Manual trigger from GitHub Actions UI
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
-permissions:
-  contents: write  # ✅ allow push to repo
-
+defaults:
+  run:
+    shell: bash
 jobs:
   download:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          persist-credentials: true
-          fetch-depth: 0
+      - name: Checkout
+        uses: actions/checkout@v6.0.0
 
-      - name: Set up Python
+      - name: Install Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: '3.12'
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install pandas requests cairosvg
+      - name: Install Dependencies
+        run: pip install requests
 
-      - name: Run ABS ANA_AGG download script
-        run: python scr/getABS_ANA_AGG.py
+      - name: Download files
+        run: python src/getRBAGraphs.py
 
-      - name: Commit and push CSV results
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Upload downloads
+        uses: actions/upload-artifact@v5.0.0
+        with:
+          name: Images
+          path: downloaded_files/
 
-          mkdir -p Data
-          git add Data/*.csv || true
+# on:
+#   # Uncomment to enable weekly schedule at 00:00 UTC on Saturday
+#   # schedule:
+#   #   - cron: '0 0 * * 6'
 
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
-          else
-            git commit -m "Update ABS ANA_AGG data (automated)"
-            git push origin HEAD:${{ github.ref }}
-          fi
+#   # Manual trigger from GitHub Actions UI
+#   workflow_dispatch:
 
-      - name: Upload ABS Data CSV
+# permissions:
+#   contents: write  # ✅ allow push to repo
+
+# jobs:
+#   download:
+#     runs-on: ubuntu-latest
+#     defaults:
+#       run:
+#         shell: bash
+
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
+#         with:
+#           token: ${{ secrets.GITHUB_TOKEN }}
+#           persist-credentials: true
+#           fetch-depth: 0
+
+#       - name: Set up Python
+#         uses: actions/setup-python@v5
+#         with:
+#           python-version: "3.12"
+
+#       - name: Install dependencies
+#         run: |
+#           python -m pip install --upgrade pip
+#           pip install pandas requests cairosvg
+
+#       - name: Run ABS ANA_AGG download script
+#         run: python scr/getABS_ANA_AGG.py
+
+#       - name: Commit and push CSV results
+#         run: |
+#           git config --global user.name "github-actions[bot]"
+#           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+#           mkdir -p Data
+#           git add Data/*.csv || true
+
+#           if git diff --cached --quiet; then
+#             echo "No changes to commit."
+#           else
+#             git commit -m "Update ABS ANA_AGG data (automated)"
+#             git push origin HEAD:${{ github.ref }}
+#           fi
+
+#       - name: Upload ABS Data CSV
         uses: actions/upload-artifact@v4
         with:
           name: ABS-ANA-AGG-Data
