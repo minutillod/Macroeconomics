@@ -53,7 +53,7 @@ def main():
     df_all = df_all.sort_values("Date").reset_index(drop=True)
 
     # SCALE: Divide by 1000 to convert to millions
-    for col in ["Working_Age_Population", "Not_in_Labour_Force", "Labour_Force", "Employment", "Unemployment"]:
+    for col in ["Working_Age_Population", "Not_in_Labour_Force", "Labour_Force", "Employment", "Unemployment", "Emp_SA_FT", "Emp_SA_PT", "Emp_SA_Total"]:
         if col in df_all.columns:
             df_all[col] = (df_all[col] / 1000)
 
