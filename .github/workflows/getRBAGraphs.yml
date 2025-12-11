@@ -1,5 +1,4 @@
-name: Download ABS Data (ANA_AGG)
-
+name: Download RBA Graphs
 on:
   # Uncomment to enable weekly schedule at 00:00 UTC on Saturday
   # schedule:
