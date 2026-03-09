@@ -29,6 +29,7 @@ urls_to_download = [
     f"{base_url}balance-payments/import-volumes.svg",
     f"{base_url}balance-payments/current-account-balance.svg",
     f"{base_url}balance-payments/external-position.svg",
+    f"{base_url}balance-payments/net-capital-inflow.svg",
     # Central Bank Balance Sheets and Bond Purchases
     f"{base_url}central-bank-balance-sheets-bond-purchases/rba-assets.svg",
     f"{base_url}central-bank-balance-sheets-bond-purchases/rba-liabilities.svg",
