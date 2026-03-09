@@ -26,12 +26,12 @@ SERIES = {
     "M13.1.1599.20": "UR_SA_Male",
     "M13.2.1599.20": "UR_SA_Female",
     "M13.3.1599.20": "UR_SA_Total",
-    "M19.1.1599.20": "FT_SA_Male",
-    "M19.2.1599.20": "FT_SA_Female",
-#    "M19.3.1599.20": "FT_SA_Total",
-    "M20.1.1599.20": "PT_SA_Male",
-    "M20.2.1599.20": "PT_SA_Female",
-#    "M20.3.1599.20": "PT_SA_Total",
+    "M19.1.1599..20": "FT_SA_Male",
+    "M19.2.1599..20": "FT_SA_Female",
+#    "M19.3.1599..20": "FT_SA_Total",
+    "M20.1.1599..20": "PT_SA_Male",
+    "M20.2.1599..20": "PT_SA_Female",
+#    "M20.3.1599..20": "PT_SA_Total",
     }
 
 def fetch_series(series_key):
