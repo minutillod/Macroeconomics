@@ -26,6 +26,12 @@ SERIES = {
     "M13.1.1599.20": "UR_SA_Male",
     "M13.2.1599.20": "UR_SA_Female",
     "M13.3.1599.20": "UR_SA_Total",
+    "M19.1.1599.20": "FT_SA_Male",
+    "M19.2.1599.20": "FT_SA_Female",
+#    "M19.3.1599.20": "FT_SA_Total",
+    "M20.1.1599.20": "PT_SA_Male",
+    "M20.2.1599.20": "PT_SA_Female",
+#    "M20.3.1599.20": "PT_SA_Total",
     }
 
 def fetch_series(series_key):
@@ -61,6 +67,17 @@ def main():
     for col in ["Participation_Rate", "Unemployment_Rate"]:
         if col in df_all.columns:
             df_all[col] = (df_all[col] / 100)
+
+    # --- Derived series ---
+    if {"FT_SA_Male", "PT_SA_Male"}.issubset(df_all.columns):
+        df_all["FT_Share_Male"] = df_all["FT_SA_Male"] / (
+            df_all["FT_SA_Male"] + df_all["PT_SA_Male"]
+        )
+
+    if {"FT_SA_Female", "PT_SA_Female"}.issubset(df_all.columns):
+        df_all["FT_Share_Female"] = df_all["FT_SA_Female"] / (
+            df_all["FT_SA_Female"] + df_all["PT_SA_Female"]
+        )
 
     df_all.to_csv("LF_monthly.csv", index=False)
 
