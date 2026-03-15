@@ -10,7 +10,7 @@ FORMAT = "format=csv"
 SERIES = {
     # Original Series - Changed to Seasonally Adjusted (where possible) per Headline!
     "M11.3.1599.10": "Working_Age_Population",
-    "M10.3.1599.20": "Not_in_Labour_Force",
+    "M10.3.1599.10": "Not_in_Labour_Force",
     "M9.3.1599.20": "Labour_Force",
     "M3.3.1599.20": "Employment",
     "M6.3.1599.20": "Unemployment",
