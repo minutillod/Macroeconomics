@@ -8,14 +8,14 @@ FORMAT = "format=csv"
 
 # Define the labour Force series and descriptive names
 SERIES = {
-    # Original Series
-    "M11.3.1599.10": "Working_Age_Population",
-    "M10.3.1599.10": "Not_in_Labour_Force",
-    "M9.3.1599.10": "Labour_Force",
-    "M3.3.1599.10": "Employment",
-    "M6.3.1599.10": "Unemployment",
-    "M12.3.1599.10": "Participation_Rate",
-    "M13.3.1599.10": "Unemployment_Rate",
+    # Original Series - Changed to Seasonally Adjusted per Headline!
+    "M11.3.1599.20": "Working_Age_Population",
+    "M10.3.1599.20": "Not_in_Labour_Force",
+    "M9.3.1599.20": "Labour_Force",
+    "M3.3.1599.20": "Employment",
+    "M6.3.1599.20": "Unemployment",
+    "M12.3.1599.20": "Participation_Rate",
+    "M13.3.1599.20": "Unemployment_Rate",
     # Seasonally Adjusted Series (for Trend Data)
     "M1.1.1599.20": "Emp_SA_FT_Male",
     "M1.2.1599.20": "Emp_SA_FT_Female",
