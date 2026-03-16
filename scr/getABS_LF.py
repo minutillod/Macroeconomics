@@ -62,7 +62,8 @@ def main():
             df_all[col] = (df_all[col] / 1000)
 
     # SCALE: Divide by 100 to convert to rate
-    for col in ["Participation_Rate", "Unemployment_Rate"]:
+    # Note that we use the Seasonally Adjusted data for Participation Rate and Unemployment Rate
+    for col in ["PR_SA_Total", "UR_SA_Total"]: 
         if col in df_all.columns:
             df_all[col] = (df_all[col] / 100)
 
