@@ -10,7 +10,7 @@ FORMAT = "format=csv"
 SERIES = {
     "GNE.SSS": "Real_GNE", # Gross National Expenditure.All Sectors
     "GPM.SSS": "Real_GDP", # Gross Domestic Product.All Sectors
-    "FCE.PSS": "Consumption", # Final Consumption Expenditure.Private Sector
+    "FCE.PHS": "Consumption", # Final Consumption Expenditure.Private Sector
     "GFC.PSS": "Investment", # Gross Capital Formation.Private Sector
     "GNE.GSS": "Government", # Gross National Expenditure.Public Sector (C+I)
     "XGS.SSS": "Exports", # Exports of Goods and Services.All Sectors
