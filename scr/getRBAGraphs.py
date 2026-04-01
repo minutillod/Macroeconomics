@@ -43,6 +43,8 @@ urls_to_download = [
     f"{base_url}exchange-rates/australian-dollar-trade-weighted-index.svg",
     f"{base_url}exchange-rates/australian-dollar.svg",
     f"{base_url}exchange-rates/us-dollar.svg",
+    # Banking Indicators
+    f"{base_url}banking-indicators/funding-composition-of-banks-in-australia.svg",
 ]
 
 # Directory to save the downloaded files
