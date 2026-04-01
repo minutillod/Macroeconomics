@@ -17,6 +17,8 @@ urls_to_download = [
     f"{base_url}aus-inflation/consumer-price-inflation.svg",
     # Household Sector
     f"{base_url}household-sector/household-income-and-consumption.svg",
+    # Credit and Money
+    f"{base_url}credit-money/monetary-aggregates-growth.svg",
     # Factors of Production and Labour Market
     f"{base_url}factors-prod-labour-mkt/employment-and-participation-rates.svg",
     f"{base_url}factors-prod-labour-mkt/employment-and-hours-worked.svg",
