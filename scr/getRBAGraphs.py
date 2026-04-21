@@ -36,6 +36,7 @@ urls_to_download = [
     f"{base_url}central-bank-balance-sheets-bond-purchases/rba-assets.svg",
     f"{base_url}central-bank-balance-sheets-bond-purchases/rba-liabilities.svg",
     # Interest Rates
+    f"{base_url}interest-rates/australian-cash-rate.svg",
     f"{base_url}interest-rates/australian-cash-rate-and-90-day-bill-yield.svg",
     f"{base_url}interest-rates/fixed-housing-interest-rates.svg",
     f"{base_url}interest-rates/australian-business-lending-rates.svg",
