@@ -15,7 +15,7 @@ SERIES = {
 
 def fetch_series(series_key):
     """Fetch one ABS ANA_EXP / CPI series from the API and return a tidy DataFrame."""
-    url = f"{series_key}?{FORMAT}"
+    url = f"{series_key}?startPeriod=1960-Q1&{FORMAT}"
     resp = requests.get(url)
     resp.raise_for_status()
     df = pd.read_csv(StringIO(resp.text))
