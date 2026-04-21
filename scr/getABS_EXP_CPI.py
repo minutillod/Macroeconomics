@@ -5,7 +5,7 @@ from io import StringIO
 # Base API endpoint
 FORMAT = "format=csv"
 
-# Define the six GDP series and descriptive names
+# Define the four Price Index series and descriptive names
 SERIES = {
     "https://data.api.abs.gov.au/rest/data/ABS,ANA_EXP,1.0.0/DCH.GPM.SSS...Q": "GDP_Deflator",
     "https://data.api.abs.gov.au/rest/data/ABS,ANA_EXP,1.0.0/PCT_DCH.GPM.SSS...Q": "GDP_Deflator_Growth",
@@ -39,10 +39,13 @@ def renormalize_to_base(df, column_name, base_period="2020-Q1"):
     if pd.isna(base_value):
         raise ValueError(f"Base value for {column_name} at {base_period} is missing.")
 
-    new_column_name = f"{column_name}_2020Q1_100"
-    df[new_column_name] = df[column_name] / base_value * 100
+    new_column_name = f"{column_name}_Base2020"
+    
+    # Create and round to 1 decimal place
+    df[new_column_name] = (df[column_name] / base_value * 100).round(1)
+    
     return df
-
+    
 def main():
     print("Fetching ABS Price Index series…")
 
