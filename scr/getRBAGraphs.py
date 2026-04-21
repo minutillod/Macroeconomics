@@ -46,6 +46,8 @@ urls_to_download = [
     f"{base_url}exchange-rates/us-dollar.svg",
     # Banking Indicators
     f"{base_url}banking-indicators/funding-composition-of-banks-in-australia.svg",
+    # Miscellaneous
+    f"https://www.rba.gov.au/education/images/explainers/groups-in-the-cpi-basket-and-their-weights.svg",
 ]
 
 # Directory to save the downloaded files
