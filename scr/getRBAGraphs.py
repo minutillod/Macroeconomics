@@ -30,6 +30,7 @@ urls_to_download = [
     f"{base_url}balance-payments/export-volumes.svg",
     f"{base_url}balance-payments/import-volumes.svg",
     f"{base_url}balance-payments/current-account-balance.svg",
+    f"{base_url}balance-payments/saving-and-investment.svg",
     f"{base_url}balance-payments/external-position.svg",
     f"{base_url}balance-payments/net-capital-inflow.svg",
     # Central Bank Balance Sheets and Bond Purchases
@@ -38,6 +39,7 @@ urls_to_download = [
     # Interest Rates
     f"{base_url}interest-rates/australian-cash-rate.svg",
     f"{base_url}interest-rates/australian-cash-rate-and-90-day-bill-yield.svg",
+    f"{base_url}interest-rates/differential-between-australian-and-us-10-year-government-bond-yields.svg",
     f"{base_url}interest-rates/fixed-housing-interest-rates.svg",
     f"{base_url}interest-rates/australian-business-lending-rates.svg",
     # Exchange Rates
