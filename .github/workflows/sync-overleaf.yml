@@ -5,8 +5,8 @@ on:
 
   workflow_run:
     workflows:
-      - "Update ABS Data"
-      - "Update RBA Charts"
+      - "Download ABS Data (ANA_AGG)"
+      - "Download RBA Charts"
     types:
       - completed
 
