@@ -1,0 +1,85 @@
+name: Sync data and images to Overleaf
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Update ABS Data"]
+    types: [completed]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: overleaf-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout GitHub repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+
+      - name: Clone existing Overleaf project
+        env:
+          OVERLEAF_PROJECT_ID: ${{ secrets.OVERLEAF_PROJECT_ID }}
+          OVERLEAF_TOKEN: ${{ secrets.OVERLEAF_TOKEN }}
+        run: |
+          cat > "$RUNNER_TEMP/git-askpass.sh" <<'EOF'
+          #!/bin/sh
+          case "$1" in
+            *Username*) printf '%s\n' git ;;
+            *Password*) printf '%s\n' "$OVERLEAF_TOKEN" ;;
+          esac
+          EOF
+
+          chmod 700 "$RUNNER_TEMP/git-askpass.sh"
+
+          export GIT_ASKPASS="$RUNNER_TEMP/git-askpass.sh"
+          export GIT_TERMINAL_PROMPT=0
+
+          git clone \
+            "https://git.overleaf.com/${OVERLEAF_PROJECT_ID}" \
+            "$RUNNER_TEMP/overleaf"
+
+      - name: Copy updated data and images
+        run: |
+          mkdir -p "$RUNNER_TEMP/overleaf/Data"
+          mkdir -p "$RUNNER_TEMP/overleaf/Images"
+
+          rsync -av --delete \
+            Data/ "$RUNNER_TEMP/overleaf/Data/"
+
+          rsync -av --delete \
+            Images/ "$RUNNER_TEMP/overleaf/Images/"
+
+      - name: Commit and push changes to Overleaf
+        env:
+          OVERLEAF_TOKEN: ${{ secrets.OVERLEAF_TOKEN }}
+        run: |
+          cd "$RUNNER_TEMP/overleaf"
+
+          git config user.name "GitHub Actions"
+          git config user.email "actions@users.noreply.github.com"
+
+          git add Data/ Images/
+
+          if git diff --cached --quiet; then
+            echo "No changes to synchronise."
+            exit 0
+          fi
+
+          git commit -m "Update economic data and images"
+
+          export GIT_ASKPASS="$RUNNER_TEMP/git-askpass.sh"
+          export GIT_TERMINAL_PROMPT=0
+
+          git push origin HEAD:master
