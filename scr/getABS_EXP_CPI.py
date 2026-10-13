@@ -65,7 +65,7 @@ def main():
     df_all = renormalize_to_base(df_all, "CPI", base_period="2020-Q1")
 
     # Save to CSV
-    df_all.to_csv("EXP_CPI_quarterly.csv", index=False)
+    df_all.to_csv("Data/EXP_CPI_quarterly.csv", index=False)
 
     print("✅ Quarterly data saved to 'EXP_CPI_quarterly.csv'")
     print(df_all.tail())
