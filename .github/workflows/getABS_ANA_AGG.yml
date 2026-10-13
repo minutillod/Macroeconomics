@@ -40,12 +40,19 @@ jobs:
       - name: Run ABS ANA_AGG download script
         run: python scr/getABS_ANA_AGG.py
 
+      #This is new code to put the output file in a particular directory
+      - name: Move CSV files to Data folder
+        run: |
+          mkdir -p Data
+          mv ./*.csv Data/
+
       - name: Commit and push CSV results
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add *.csv || true
+          #Original line: git add *.csv || true
+          git add Data/*.csv || true
 
           if git diff --cached --quiet; then
             echo "No changes to commit."
