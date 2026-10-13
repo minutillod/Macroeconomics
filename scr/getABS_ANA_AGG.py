@@ -109,7 +109,7 @@ def main():
         )
 
     df_annual = df_annual.sort_values("Year")
-    df_annual.to_csv("ANA_AGG_annual.csv", index=False)
+    df_annual.to_csv("Data/ANA_AGG_annual.csv", index=False)
 
     print("✅ Annual data saved to 'ANA_AGG_annual.csv'")
     print(df_annual.tail())
