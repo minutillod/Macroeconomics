@@ -41,7 +41,7 @@ def main():
         if col in df_all.columns:
             df_all[col] = (df_all[col] / 1000000)
 
-    df_all.to_csv("ERP_quarterly.csv", index=False)
+    df_all.to_csv("Data/ERP_quarterly.csv", index=False)
 
     
     print("✅ Quarterly data saved to 'ERP_quarterly.csv'")
