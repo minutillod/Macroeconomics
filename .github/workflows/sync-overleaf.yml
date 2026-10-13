@@ -62,24 +62,24 @@ jobs:
             Images/ "$RUNNER_TEMP/overleaf/Images/"
 
       - name: Commit and push changes to Overleaf
-       env:
-          OVERLEAF_TOKEN: ${{ secrets.OVERLEAF_TOKEN }}
-      run: |
-        cd "$RUNNER_TEMP/overleaf"
-    
-        git config user.name "GitHub Actions"
-        git config user.email "actions@users.noreply.github.com"
-    
-        git add Data/ Images/
-    
-        if git diff --cached --quiet; then
-          echo "No changes to synchronise."
-          exit 0
-        fi
-    
-        git commit -m "Update economic data and images"
-    
-        export GIT_ASKPASS="$RUNNER_TEMP/git-askpass.sh"
-        export GIT_TERMINAL_PROMPT=0
-    
-        git push origin HEAD:refs/heads/main
+    env:
+      OVERLEAF_TOKEN: ${{ secrets.OVERLEAF_TOKEN }}
+    run: |
+      cd "$RUNNER_TEMP/overleaf"
+  
+      git config user.name "GitHub Actions"
+      git config user.email "actions@users.noreply.github.com"
+  
+      git add Data/ Images/
+  
+      if git diff --cached --quiet; then
+        echo "No changes to synchronise."
+        exit 0
+      fi
+  
+      git commit -m "Update economic data and images"
+  
+      export GIT_ASKPASS="$RUNNER_TEMP/git-askpass.sh"
+      export GIT_TERMINAL_PROMPT=0
+  
+      git push origin HEAD:refs/heads/main
