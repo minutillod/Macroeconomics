@@ -111,5 +111,9 @@ jobs:
           export GIT_ASKPASS="$RUNNER_TEMP/git-askpass.sh"
           export GIT_TERMINAL_PROMPT=0
 
+          git branch -vv
+          git remote show origin
+          git config --get-regexp '^(remote|branch|push)\.' || true
+
           # Explicitly push to Overleaf's main branch
           git push origin HEAD:refs/heads/main
