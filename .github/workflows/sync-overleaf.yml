@@ -80,10 +80,10 @@ jobs:
           mkdir -p "$RUNNER_TEMP/overleaf/Data"
           mkdir -p "$RUNNER_TEMP/overleaf/Images"
 
-          rsync -av --delete \
+          rsync -av \ #--delete \
             Data/ "$RUNNER_TEMP/overleaf/Data/"
 
-          rsync -av --delete \
+          rsync -av \ #--delete \
             Images/ "$RUNNER_TEMP/overleaf/Images/"
 
       # --------------------------------------------------
