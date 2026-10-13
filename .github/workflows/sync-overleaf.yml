@@ -2,9 +2,13 @@ name: Sync data and images to Overleaf
 
 on:
   workflow_dispatch:
+
   workflow_run:
-    workflows: ["Update ABS Data"]
-    types: [completed]
+    workflows:
+      - "Update ABS Data"
+      - "Update RBA Charts"
+    types:
+      - completed
 
 permissions:
   contents: read
@@ -22,17 +26,35 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+      # --------------------------------------------------
+      # 1. Checkout the GitHub repository
+      # --------------------------------------------------
       - name: Checkout GitHub repository
         uses: actions/checkout@v4
         with:
           ref: main
           persist-credentials: false
 
+      # --------------------------------------------------
+      # 2. Clone the existing Overleaf project
+      # --------------------------------------------------
       - name: Clone existing Overleaf project
         env:
           OVERLEAF_PROJECT_ID: ${{ secrets.OVERLEAF_PROJECT_ID }}
           OVERLEAF_TOKEN: ${{ secrets.OVERLEAF_TOKEN }}
         run: |
+          # Accept either a project ID or a full URL
+          PROJECT_ID="${OVERLEAF_PROJECT_ID%/}"
+          PROJECT_ID="${PROJECT_ID##*/}"
+
+          # Validate the project ID
+          if [[ ! "$PROJECT_ID" =~ ^[a-fA-F0-9]{24}$ ]]; then
+            echo "::error::Invalid Overleaf project ID."
+            exit 1
+          fi
+
+          # Configure Git authentication
           cat > "$RUNNER_TEMP/git-askpass.sh" <<'EOF'
           #!/bin/sh
           case "$1" in
@@ -47,9 +69,12 @@ jobs:
           export GIT_TERMINAL_PROMPT=0
 
           git clone \
-            "https://git.overleaf.com/${OVERLEAF_PROJECT_ID}" \
+            "https://git.overleaf.com/${PROJECT_ID}" \
             "$RUNNER_TEMP/overleaf"
 
+      # --------------------------------------------------
+      # 3. Copy updated data and images into Overleaf
+      # --------------------------------------------------
       - name: Copy updated data and images
         run: |
           mkdir -p "$RUNNER_TEMP/overleaf/Data"
@@ -61,25 +86,30 @@ jobs:
           rsync -av --delete \
             Images/ "$RUNNER_TEMP/overleaf/Images/"
 
+      # --------------------------------------------------
+      # 4. Commit and push changes to Overleaf
+      # --------------------------------------------------
       - name: Commit and push changes to Overleaf
-    env:
-      OVERLEAF_TOKEN: ${{ secrets.OVERLEAF_TOKEN }}
-    run: |
-      cd "$RUNNER_TEMP/overleaf"
-  
-      git config user.name "GitHub Actions"
-      git config user.email "actions@users.noreply.github.com"
-  
-      git add Data/ Images/
-  
-      if git diff --cached --quiet; then
-        echo "No changes to synchronise."
-        exit 0
-      fi
-  
-      git commit -m "Update economic data and images"
-  
-      export GIT_ASKPASS="$RUNNER_TEMP/git-askpass.sh"
-      export GIT_TERMINAL_PROMPT=0
-  
-      git push origin HEAD:refs/heads/main
+        env:
+          OVERLEAF_TOKEN: ${{ secrets.OVERLEAF_TOKEN }}
+        run: |
+          cd "$RUNNER_TEMP/overleaf"
+
+          git config user.name "GitHub Actions"
+          git config user.email "actions@users.noreply.github.com"
+
+          git add Data/ Images/
+
+          # Exit successfully if nothing has changed
+          if git diff --cached --quiet; then
+            echo "No changes to synchronise."
+            exit 0
+          fi
+
+          git commit -m "Update economic data and images"
+
+          export GIT_ASKPASS="$RUNNER_TEMP/git-askpass.sh"
+          export GIT_TERMINAL_PROMPT=0
+
+          # Explicitly push to Overleaf's main branch
+          git push origin HEAD:refs/heads/main
