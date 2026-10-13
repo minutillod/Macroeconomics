@@ -78,7 +78,7 @@ def main():
             df_all["Emp_SA_FT_Female"] + df_all["Emp_SA_PT_Female"]
         )
 
-    df_all.to_csv("LF_monthly.csv", index=False)
+    df_all.to_csv("Data/LF_monthly.csv", index=False)
 
     
     print("✅ Monthly data saved to 'LF_monthly.csv'")
