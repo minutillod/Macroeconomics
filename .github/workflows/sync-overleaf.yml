@@ -82,4 +82,4 @@ jobs:
           export GIT_ASKPASS="$RUNNER_TEMP/git-askpass.sh"
           export GIT_TERMINAL_PROMPT=0
 
-          git push origin HEAD:master
+          git push origin HEAD:main
