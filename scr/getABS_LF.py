@@ -78,9 +78,12 @@ def main():
             df_all["Emp_SA_FT_Female"] + df_all["Emp_SA_PT_Female"]
         )
 
+    if {"PR_SA_Total"}.issubset(df_all.columns):
+        df_all["PR_SA_Total_Scaled"] = df_all["PR_SA_Total"] * 100
+        )
+
     df_all.to_csv("Data/LF_monthly.csv", index=False)
 
-    
     print("✅ Monthly data saved to 'LF_monthly.csv'")
     print(df_all.tail())
 
