@@ -70,17 +70,14 @@ def main():
     # --- Derived series ---
     if {"Emp_SA_FT_Male", "Emp_SA_PT_Male"}.issubset(df_all.columns):
         df_all["FT_Share_Male"] = df_all["Emp_SA_FT_Male"] / (
-            df_all["Emp_SA_FT_Male"] + df_all["Emp_SA_PT_Male"]
-        )
+            df_all["Emp_SA_FT_Male"] + df_all["Emp_SA_PT_Male"])
 
     if {"Emp_SA_FT_Female", "Emp_SA_PT_Female"}.issubset(df_all.columns):
         df_all["FT_Share_Female"] = df_all["Emp_SA_FT_Female"] / (
-            df_all["Emp_SA_FT_Female"] + df_all["Emp_SA_PT_Female"]
-        )
+            df_all["Emp_SA_FT_Female"] + df_all["Emp_SA_PT_Female"])
 
     if {"PR_SA_Total"}.issubset(df_all.columns):
         df_all["PR_SA_Total_Scaled"] = df_all["PR_SA_Total"] * 100
-        )
 
     df_all.to_csv("Data/LF_monthly.csv", index=False)
 
